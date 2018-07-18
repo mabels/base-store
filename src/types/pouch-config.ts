@@ -1,19 +1,19 @@
 
-export interface PouchConnectObj {
+export interface PouchConfigObj {
   readonly path: string;
   readonly dbConfig?: PouchDB.Configuration.DatabaseConfiguration;
 }
 
-export class PouchConnect implements PouchConnectObj {
+export class PouchConfig implements PouchConfigObj {
   public readonly path: string;
   public readonly dbConfig?: PouchDB.Configuration.DatabaseConfiguration;
 
-  constructor(pci: PouchConnectObj) {
+  constructor(pci: PouchConfigObj) {
     this.path = pci.path;
     this.dbConfig = pci.dbConfig;
   }
 
-  public asObj(): PouchConnectObj {
+  public asObj(): PouchConfigObj {
     return {
       path: this.path,
       dbConfig: this.dbConfig
