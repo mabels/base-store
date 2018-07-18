@@ -1,0 +1,50 @@
+{
+  "name": "base-store",
+  "version": "1.0.0",
+  "description": "share package for obj and sha store",
+  "main": "./dist/src/index.js",
+  "typings": "dist/src/index.d.ts",
+  "files": [
+    "dist",
+    "src",
+    "test",
+    "tsconfig.json",
+    "tslint.json"
+  ],
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "scripts": {
+    "clean": "rm -rf dist .pdb",
+    "build": "tsc",
+    "prepack": "npm run clean && npm run lint && npm run test",
+    "test": "npm run clean && npm run build && npm run lint && mocha ./dist/test/*-test.js",
+    "lint": "tslint --project ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "mabels/base-store"
+  },
+  "license": "AFL-2.0",
+  "bugs": {
+    "url": "https://github.com/mabels/base-store/issues"
+  },
+  "homepage": "https://github.com/mabels/base-store#readme",
+  "devDependencies": {
+    "@types/chai": "4.1.4",
+    "@types/mocha": "5.2.5",
+    "@types/node": "^10.5.2",
+    "@types/uuid": "^3.4.3",
+    "@types/pouchdb": "^6.3.2",
+    "chai": ">=4.1.2",
+    "mocha": "5.2.0",
+    "tslint": ">=5.7.0",
+    "typescript": "^2.7.2"
+  },
+  "dependencies": {
+    "pouchdb": "^7.0.0",
+    "pouchdb-find": "^7.0.0",
+    "rxjs": "^6.2.2",
+    "uuid": "^3.3.0"
+  }
+}
