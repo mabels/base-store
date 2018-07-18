@@ -1,5 +1,5 @@
 {
-  "name": "base-store",
+  "name": "foundation-store",
   "version": "1.0.0",
   "description": "share package for obj and sha store",
   "main": "./dist/src/index.js",
@@ -23,13 +23,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "mabels/base-store"
+    "url": "mabels/foundation-store"
   },
   "license": "AFL-2.0",
   "bugs": {
-    "url": "https://github.com/mabels/base-store/issues"
+    "url": "https://github.com/mabels/foundation-store/issues"
   },
-  "homepage": "https://github.com/mabels/base-store#readme",
+  "homepage": "https://github.com/mabels/foundation-store#readme",
   "devDependencies": {
     "@types/chai": "4.1.4",
     "@types/mocha": "5.2.5",
