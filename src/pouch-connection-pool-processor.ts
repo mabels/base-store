@@ -3,6 +3,8 @@ import { PouchConnectionReq } from './msgs/pouch-connection-req';
 import { MsgBus } from './msg-bus';
 import { PouchConnectionRes } from './msgs/pouch-connection-res';
 
+PouchDB.plugin(require('pouchdb-find'));
+
 export class PouchConnectionPoolProcessor {
 
   private readonly pouchDbs: Map<string, PouchConnectionRes>;
