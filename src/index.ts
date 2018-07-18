@@ -1,6 +1,6 @@
 
 export { PouchConnect, PouchConnectObj } from './types/pouch-connect';
-export { PouchBase } from './types/pouch-base';
+export { PouchBase, PouchBaseInit } from './types/pouch-base';
 
 export { Msg } from './types/msg';
 export { Match } from './types/match';
