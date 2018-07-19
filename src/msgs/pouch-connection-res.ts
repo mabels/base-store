@@ -1,20 +1,19 @@
-import { Msg } from '../types/msg';
+import { Msg, MsgInit } from '../types/msg';
 import { Match } from '../types/match';
 import { PouchConfigObj } from '../types/pouch-config';
 
-export interface PouchConnectionResInit {
-  readonly tid: string;
+export interface PouchConnectionResInit extends MsgInit {
   readonly created?: Date;
   readonly config: PouchConfigObj;
   readonly pouchDb: PouchDB.Database;
 }
 
 export class PouchConnectionRes extends Msg implements PouchConnectionResInit {
-  public readonly created: Date = new Date();
+  public readonly created: Date;
   public readonly config: PouchConfigObj;
   public readonly pouchDb: PouchDB.Database;
 
-  public static is(msg: any): Match<PouchConnectionRes> {
+  public static is(msg: Msg): Match<PouchConnectionRes> {
     if (msg instanceof PouchConnectionRes) {
       // console.log(`Match:FeedDone`, msg);
       return Match.create<PouchConnectionRes>(msg);
@@ -23,7 +22,7 @@ export class PouchConnectionRes extends Msg implements PouchConnectionResInit {
   }
 
   constructor(pcri: PouchConnectionResInit) {
-    super(pcri.tid);
+    super(pcri);
     this.created = this.created || (new Date());
     this.config = pcri.config;
     this.pouchDb = pcri.pouchDb;

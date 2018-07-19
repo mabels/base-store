@@ -31,8 +31,11 @@ describe('pouchdb connection pool', () => {
               if (!pouchDb) {
                 pouchDb = pcr.pouchDb;
                 tid = uuid.v4();
-                bus.next(new PouchConnectionReq(tid, {
-                  path: pcr.config.path
+                bus.next(new PouchConnectionReq({
+                  tid: tid,
+                  config: {
+                    path: pcr.config.path
+                  }
                 }));
               } else {
                 assert.equal(pouchDb, pcr.pouchDb);
@@ -47,8 +50,11 @@ describe('pouchdb connection pool', () => {
         });
       });
     });
-    bus.next(new PouchConnectionReq(tid, {
-      path: path.join('.pdb', tid)
+    bus.next(new PouchConnectionReq({
+      tid: tid,
+      config: {
+        path: path.join('.pdb', tid)
+      }
     }));
   });
 

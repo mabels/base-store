@@ -1,8 +1,12 @@
-import { Msg } from '../types/msg';
+import { Msg, MsgInit } from '../types/msg';
 import { Match } from '../types/match';
 import { PouchConfigObj } from '../types/pouch-config';
 
-export class PouchConnectionReq extends Msg {
+export interface PouchConnectionReqInit extends MsgInit {
+  readonly config: PouchConfigObj;
+}
+
+export class PouchConnectionReq extends Msg implements PouchConnectionReqInit {
 
   public readonly config: PouchConfigObj;
 
@@ -14,9 +18,9 @@ export class PouchConnectionReq extends Msg {
     return Match.nothing();
   }
 
-  constructor(tid: string, pc: PouchConfigObj) {
-    super(tid);
-    this.config = pc;
+  constructor(pcri: PouchConnectionReqInit) {
+    super(pcri);
+    this.config = pcri.config;
   }
 
 }
