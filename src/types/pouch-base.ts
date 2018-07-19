@@ -2,9 +2,9 @@ import * as url from 'url';
 import * as uuid from 'uuid';
 
 export interface PouchBaseInit {
-  readonly _id: string;
-  readonly type: string;
-  readonly created: string;
+  readonly _id?: string;
+  readonly type?: string;
+  readonly created?: string;
 }
 
 export class PouchBase {
