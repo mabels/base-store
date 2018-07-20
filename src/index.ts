@@ -1,11 +1,8 @@
+import * as Types from './types/index';
+export { Types };
 
-export { PouchConfig, PouchConfigObj } from './types/pouch-config';
-export { PouchBase, PouchBaseInit } from './types/pouch-base';
-export { Msg } from './types/msg';
-export { Match } from './types/match';
-
-export { PouchConnectionReq } from './msgs/pouch-connection-req';
-export { PouchConnectionRes } from './msgs/pouch-connection-res';
+import * as Msgs from './msgs/index';
+export { Msgs };
 
 export { MsgBus } from './msg-bus';
 

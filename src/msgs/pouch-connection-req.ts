@@ -1,14 +1,15 @@
 import { Msg, MsgInit } from '../types/msg';
-import { Match } from '../types/match';
-import { PouchConfigObj } from '../types/pouch-config';
+import { Match, MatchType } from '../types/match';
+import { PouchConfigInit } from '../types/pouch-config';
+import { Typeable } from '../types/typeable';
 
-export interface PouchConnectionReqInit extends MsgInit {
-  readonly config: PouchConfigObj;
+export interface PouchConnectionReqInit extends MatchType {
+  readonly config: PouchConfigInit;
 }
 
-export class PouchConnectionReq extends Msg implements PouchConnectionReqInit {
-
-  public readonly config: PouchConfigObj;
+export class PouchConnectionReq extends Typeable implements PouchConnectionReqInit {
+  public readonly msg: MsgInit;
+  public readonly config: PouchConfigInit;
 
   public static is(msg: any): Match<PouchConnectionReq> {
     if (msg instanceof PouchConnectionReq) {
@@ -20,6 +21,7 @@ export class PouchConnectionReq extends Msg implements PouchConnectionReqInit {
 
   constructor(pcri: PouchConnectionReqInit) {
     super(pcri);
+    this.msg = Msg.toObj(pcri.msg);
     this.config = pcri.config;
   }
 

@@ -23,14 +23,14 @@ export class PouchConnectionPoolProcessor {
         if (!c) {
           const pouchDb = new PouchDB(pcr.config.path, pcr.config.dbConfig);
           c = new PouchConnectionRes({
-              tid: '',
+              msg: { tid: '' },
               config: pcr.config,
               pouchDb: pouchDb
             });
           this.pouchDbs.set(pcr.config.path, c);
         }
         msgBus.next(new PouchConnectionRes({
-          tid: pcr.tid,
+          msg: { tid: pcr.msg.tid },
           config: c.config,
           pouchDb: c.pouchDb
         }));

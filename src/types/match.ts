@@ -1,41 +1,44 @@
-import { Msg } from './msg';
+import { MsgInit } from './msg';
+import { TypeableInit } from './typeable';
 
-export class Match<T extends Msg> {
-  public readonly msg: T;
+export interface MatchType extends TypeableInit {
+  readonly msg: MsgInit;
+}
+export class Match<T extends MatchType> {
+  public readonly matchType: T;
 
-  public static create<T extends Msg>(t: T): Match<T> {
+  public static create<T extends MatchType>(t: T): Match<T> {
     return new Match(t);
   }
 
-  public static nothing<T extends Msg>(): Match<T> {
+  public static nothing<T extends MatchType>(): Match<T> {
     return new Match(null);
   }
 
   private constructor(t: T) {
-    // console.log('Match:', t);
-    this.msg = t;
+    this.matchType = t;
   }
 
-  public hasTid(msg: Msg | string): Match<T> {
+  public hasTid(matchTypeOrString: MatchType | string): Match<T> {
     let msgTid: string;
-    if ((msg instanceof Msg) && this.msg) {
-      msgTid = msg.tid;
-    } else if (typeof (msg) == 'string') {
-      msgTid = msg;
+    if (typeof (matchTypeOrString) == 'string') {
+      msgTid = matchTypeOrString;
+    } else if (matchTypeOrString.msg && this.matchType) {
+      msgTid = matchTypeOrString.msg.tid;
     }
-    if (this.msg && msgTid === this.msg.tid) {
+    if (this.matchType && msgTid === this.matchType.msg.tid) {
       return this;
     }
     return Match.nothing();
   }
 
   public get matched(): boolean {
-    return !!this.msg;
+    return !!this.matchType;
   }
 
   public match(cb: (t: T) => void): void {
-    if (this.msg) {
-      cb(this.msg);
+    if (this.matchType) {
+      cb(this.matchType);
     }
   }
 }

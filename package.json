@@ -1,6 +1,6 @@
 {
-  "name": "foundation-store",
-  "version": "3.0.1",
+  "name": "@storemate/foundation-store",
+  "version": "4.0.0",
   "description": "share package for obj and sha store",
   "main": "./dist/src/index.js",
   "typings": "dist/src/index.d.ts",

@@ -7,8 +7,7 @@ import { assert } from 'chai';
 import {
   MsgBus,
   PouchConnectionPoolProcessor,
-  PouchConnectionReq,
-  PouchConnectionRes
+  Msgs,
 } from '../src/index';
 
 describe('pouchdb connection pool', () => {
@@ -22,7 +21,7 @@ describe('pouchdb connection pool', () => {
     let tid = uuid.v4();
     PouchConnectionPoolProcessor.create(bus);
     bus.subscribe(msg => {
-      PouchConnectionRes.is(msg).hasTid(tid).match(pcr => {
+      Msgs.PouchConnectionRes.is(msg).hasTid(tid).match(pcr => {
         pcr.pouchDb.get('testId').then(r => {
           assert.fail('never call');
         }).catch(e => {
@@ -31,8 +30,8 @@ describe('pouchdb connection pool', () => {
               if (!pouchDb) {
                 pouchDb = pcr.pouchDb;
                 tid = uuid.v4();
-                bus.next(new PouchConnectionReq({
-                  tid: tid,
+                bus.next(new Msgs.PouchConnectionReq({
+                  msg: { tid },
                   config: {
                     path: pcr.config.path
                   }
@@ -50,8 +49,8 @@ describe('pouchdb connection pool', () => {
         });
       });
     });
-    bus.next(new PouchConnectionReq({
-      tid: tid,
+    bus.next(new Msgs.PouchConnectionReq({
+      msg: { tid },
       config: {
         path: path.join('.pdb', tid)
       }
